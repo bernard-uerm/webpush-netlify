@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.e39445a98e45059c53c6bb9a6ca2bad8.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.fb838d2ee982f07d1e110d97a8060749.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // custom service-worker.js
 if (workbox) {
@@ -33,6 +33,14 @@ self.addEventListener('message', (e) => {
       break;
   }
 })
+
+self.addEventListener('install', event => {
+  self.skipWaiting();
+
+  event.waitUntil(
+    // caching etc
+  );
+});
 
 // Listen to Push
 self.addEventListener('push', (e) => {
