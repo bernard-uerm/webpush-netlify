@@ -43,7 +43,7 @@ self.addEventListener('push', (e) => {
   console.log(e)
   console.log(data)
   const options = {
-    body: "UERM ETriage",
+    body: "UERM ETriage Covid ER",
     icon: '/img/icons/android-chrome-192x192.png',
     image: '/img/icons/android-chrome-192x192.png',
     vibrate: [300, 200, 300],
