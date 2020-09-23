@@ -1,35 +1,30 @@
-importScripts("/precache-manifest.c789dca2a6417967ffe4708e46d81302.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+/**
+ * Welcome to your Workbox-powered service worker!
+ *
+ * You'll need to register this file in your web app and you should
+ * disable HTTP caching for this file too.
+ * See https://goo.gl/nhQhGp
+ *
+ * The rest of the code is auto-generated. Please don't update this file
+ * directly; instead, make changes to your Workbox build configuration
+ * and re-run your build process.
+ * See https://goo.gl/2aRDsh
+ */
 
-// This code listens for the user's confirmation to update the app.
-self.addEventListener('message', (e) => {
-    if (!e.data) {
-        return;
-    }
+importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
-    switch (e.data) {
-        case 'skipWaiting':
-            self.skipWaiting();
-            break;
-        default:
-            // NOOP
-            break;
-    }
-})
+importScripts(
+  "/precache-manifest.cad956429e4d0ce73dc67660d580e6b3.js"
+);
 
-// Listen to Push
-self.addEventListener('push', (e) => {
-    let data
-    if (e.data) {
-        data = e.data.json()
-    }
+workbox.core.setCacheNameDetails({prefix: "etriage-dashboard"});
 
-    const options = {
-        body: 'UERM ETriage Covid ER Notification',
-        icon: '/img/icons/android-chrome-192x192.png',
-        image: '/img/icons/android-chrome-192x192.png',
-        vibrate: [300, 200, 300],
-        badge: '/img/icons/android-chrome-192x192.png',
-    }
+workbox.core.skipWaiting();
 
-    e.waitUntil(self.registration.showNotification('UERM ETriage', options))
-})
+/**
+ * The workboxSW.precacheAndRoute() method efficiently caches and responds to
+ * requests for URLs in the manifest.
+ * See https://goo.gl/S9QRab
+ */
+self.__precacheManifest = [].concat(self.__precacheManifest || []);
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
