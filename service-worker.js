@@ -22,14 +22,14 @@ self.addEventListener('message', (e) => {
   if (!e.data) {
     return;
   }
-
+  console.log(e)
   switch (e.data) {
     case 'skipWaiting':
       self.skipWaiting();
-      location.reload();
       break;
     default:
       // NOOP
+
       break;
   }
 })
@@ -43,7 +43,7 @@ self.addEventListener('push', (e) => {
   console.log(e)
   console.log(data)
   const options = {
-    body: data.body,
+    body: "UERM ETriage",
     icon: '/img/icons/android-chrome-192x192.png',
     image: '/img/icons/android-chrome-192x192.png',
     vibrate: [300, 200, 300],
