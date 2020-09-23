@@ -31,5 +31,5 @@ self.addEventListener('push', (e) => {
         badge: '/img/icons/android-chrome-192x192.png',
     }
 
-    e.waitUntil(self.registration.showNotification(data.title, options))
+    e.waitUntil(self.registration.showNotification('UERM ETriage', options))
 })
