@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.9f910a383e2e5f71d3c95a60fa9cf0e5.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.f6dd5d1cedb239d20300ab15e1524123.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // custom service-worker.js
 if (workbox) {
@@ -61,3 +61,21 @@ self.addEventListener('push', (e) => {
   e.waitUntil(self.registration.showNotification('UERM ETriage', options))
 })
 
+// self.addEventListener('push', function (event) {
+//   event.waitUntil(
+//     getEndpoint()
+//       .then(function (endpoint) {
+      
+//     return fetch('https://localhost:3443/getPayload?endpoint=' + endpoint);
+//       })
+//       .then(function (response) {
+//         return response.text();
+//       })
+//       .then(function (payload) {
+        
+//           self.registration.showNotification('ServiceWorker Cookbook', {
+//             body: payload,
+//           });
+//       })
+//   );
+// });
