@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.ecb584809fa2fc79e1c1e7ccd949a972.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.41fd3b94fbfe4b35f851b11a4a36e08c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // custom service-worker.js
 if (workbox) {
@@ -38,7 +38,7 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 
   event.waitUntil(
-    // caching etc
+    console.log('here')
   );
 });
 
