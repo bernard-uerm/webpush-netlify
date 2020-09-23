@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.9cef1223f7c2ca06b657d7deae8f0b2b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.c789dca2a6417967ffe4708e46d81302.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // This code listens for the user's confirmation to update the app.
 self.addEventListener('message', (e) => {
@@ -24,7 +24,7 @@ self.addEventListener('push', (e) => {
     }
 
     const options = {
-        body: data.body,
+        body: 'UERM ETriage Covid ER Notification',
         icon: '/img/icons/android-chrome-192x192.png',
         image: '/img/icons/android-chrome-192x192.png',
         vibrate: [300, 200, 300],
