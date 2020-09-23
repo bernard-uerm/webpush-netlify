@@ -1,30 +1,85 @@
-/**
- * Welcome to your Workbox-powered service worker!
- *
- * You'll need to register this file in your web app and you should
- * disable HTTP caching for this file too.
- * See https://goo.gl/nhQhGp
- *
- * The rest of the code is auto-generated. Please don't update this file
- * directly; instead, make changes to your Workbox build configuration
- * and re-run your build process.
- * See https://goo.gl/2aRDsh
- */
+importScripts("/precache-manifest.94b2777a33dfeacebf2dab07634d200c.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
-importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+// custom service-worker.js
+if (workbox) {
+  // adjust log level for displaying workbox logs
+  workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug)
 
-importScripts(
-  "/precache-manifest.1ec8a39fcf0cf29e16ee66365c8add60.js"
-);
+  // apply precaching. In the built version, the precacheManifest will
+  // be imported using importScripts (as is workbox itself) and we can 
+  // precache this. This is all we need for precaching
+  workbox.precaching.precacheAndRoute(self.__precacheManifest);
 
-workbox.core.setCacheNameDetails({prefix: "etriage-dashboard"});
+  // Make sure to return a specific response for all navigation requests.
+  // Since we have a SPA here, this should be index.html always.
+  // https://stackoverflow.com/questions/49963982/vue-router-history-mode-with-pwa-in-offline-mode
+  workbox.routing.registerNavigationRoute('/index.html')
 
-workbox.core.skipWaiting();
+  // Setup cache strategy for Google Fonts. They consist of two parts, a static one
+  // coming from fonts.gstatic.com (strategy CacheFirst) and a more ferquently updated on
+  // from fonts.googleapis.com. Hence, split in two registerroutes
+  workbox.routing.registerRoute(
+    /^https:\/\/fonts\.googleapis\.com/,
+    new workbox.strategies.StaleWhileRevalidate({
+      cacheName: 'google-fonts-stylesheets',
+    })
+  )
 
-/**
- * The workboxSW.precacheAndRoute() method efficiently caches and responds to
- * requests for URLs in the manifest.
- * See https://goo.gl/S9QRab
- */
-self.__precacheManifest = [].concat(self.__precacheManifest || []);
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+  workbox.routing.registerRoute(
+    /^https:\/\/fonts\.gstatic\.com/,
+    new workbox.strategies.CacheFirst({
+      cacheName: 'google-fonts-webfonts',
+      plugins: [
+        new workbox.cacheableResponse.Plugin({
+          statuses: [0, 200],
+        }),
+        new workbox.expiration.Plugin({
+          maxAgeSeconds: 60 * 60 * 24 * 365,
+          maxEntries: 30,
+        }),
+      ],
+    })
+  )
+
+  workbox.routing.registerRoute(
+    /^https:\/\/stackpath\.bootstrapcdn\.com/,
+    new workbox.strategies.StaleWhileRevalidate({
+      cacheName: 'fontawesome',
+    })
+  );
+}
+
+// This code listens for the user's confirmation to update the app.
+self.addEventListener('message', (e) => {
+  if (!e.data) {
+    return;
+  }
+
+  switch (e.data) {
+    case 'skipWaiting':
+      self.skipWaiting();
+      break;
+    default:
+      // NOOP
+      break;
+  }
+})
+
+// Listen to Push
+self.addEventListener('push', (e) => {
+  let data
+  if (e.data) {
+    data = e.data.json()
+  }
+
+  const options = {
+    body: data.body,
+    icon: '/img/icons/android-chrome-192x192.png',
+    image: '/img/autumn-forest.png',
+    vibrate: [300, 200, 300],
+    badge: '/img/icons/plint-badge-96x96.png',
+  }
+
+  e.waitUntil(self.registration.showNotification(data.title, options))
+})
+
