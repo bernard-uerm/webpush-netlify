@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.f6dd5d1cedb239d20300ab15e1524123.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.d372b74c56f6a87b978b42f49ebcbed1.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // custom service-worker.js
 if (workbox) {
@@ -51,7 +51,7 @@ self.addEventListener('push', (e) => {
   console.log(e)
   console.log(data)
   const options = {
-    body: "UERM ETriage Covid ER",
+    body: "UERM E-Triage: An employee is tagged for COVID-ER, please check your dashboard for details.",
     icon: '/img/icons/android-chrome-192x192.png',
     image: '/img/icons/android-chrome-192x192.png',
     vibrate: [300, 200, 300],
