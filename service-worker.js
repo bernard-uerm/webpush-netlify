@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.ef84b0aff02de8d48e27f76acbe38cf8.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.9cef1223f7c2ca06b657d7deae8f0b2b.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 // This code listens for the user's confirmation to update the app.
 self.addEventListener('message', (e) => {
